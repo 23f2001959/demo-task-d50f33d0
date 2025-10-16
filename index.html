@@ -1,31 +1,128 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snake and Ladder Game</title>
-  <style>
-    /* Your CSS styles here */
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake and Ladder Game</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+    .board {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        margin: 20px;
+    }
+    .square {
+        border: 1px solid #000;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .player-1 {
+        background-color: red;
+    }
+    .player-2 {
+        background-color: blue;
+    }
+    .token {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+</style>
 </head>
 <body>
-  <div id="board" class="board">
-    <!-- Grid of 10x10 squares for the game board -->
-    <!-- Include ladders and snakes as part of the grid -->
-    <!-- Add tokens for the players -->
-  </div>
-  
-  <div id="player-turn" class="player-turn">
-    <!-- Display current player's turn -->
-  </div>
-  
-  <button id="roll-dice">Roll Dice</button>
-  <button id="reset-game">Reset Game</button>
+<div class="container">
+    <h1>Snake and Ladder Game</h1>
+    <div class="board" id="board"></div>
+    <p id="player-turn"></p>
+    <button onclick="rollDice()">Roll Dice</button>
+    <button onclick="resetGame()">Reset Game</button>
+</div>
 
-  <script>
-    // Your JavaScript code here
-  </script>
+<script>
+    const boardSize = 10;
+    let currentPlayer = 1;
+    let player1Position = 0;
+    let player2Position = 0;
+    const snakes = { 16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78 };
+    const ladders = { 1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100 };
+
+    function createBoard() {
+        const board = document.getElementById('board');
+        for (let i = 0; i < boardSize * boardSize; i++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.id = `square-${i}`;
+            square.textContent = i + 1;
+            board.appendChild(square);
+        }
+        updateTokens();
+    }
+
+    function updateTokens() {
+        const player1Token = document.getElementById('player1');
+        if (!player1Token) {
+            player1Token = document.createElement('div');
+            player1Token.id = 'player1';
+            player1Token.classList.add('token', 'player-1');
+            document.getElementById(`square-${player1Position}`).appendChild(player1Token);
+        } else {
+            document.getElementById(`square-${player1Position}`).appendChild(player1Token);
+        }
+
+        const player2Token = document.getElementById('player2');
+        if (!player2Token) {
+            player2Token = document.createElement('div');
+            player2Token.id = 'player2';
+            player2Token.classList.add('token', 'player-2');
+            document.getElementById(`square-${player2Position}`).appendChild(player2Token);
+        } else {
+            document.getElementById(`square-${player2Position}`).appendChild(player2Token);
+        }
+    }
+
+    function rollDice() {
+        const diceRoll = Math.floor(Math.random() * 6) + 1;
+        movePlayer(diceRoll);
+        updateTokens();
+        checkForWin();
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+        document.getElementById('player-turn').textContent = `Player ${currentPlayer}'s turn`;
+    }
+
+    function movePlayer(steps) {
+        if (currentPlayer === 1) {
+            player1Position += steps;
+            player1Position = snakes[player1Position] || player1Position;
+            player1Position = ladders[player1Position] || player1Position;
+            player1Position = Math.min(player1Position, boardSize * boardSize - 1);
+        } else {
+            player2Position += steps;
+            player2Position = snakes[player2Position] || player2Position;
+            player2Position = ladders[player2Position] || player2Position;
+            player2Position = Math.min(player2Position, boardSize * boardSize - 1);
+        }
+    }
+
+    function checkForWin() {
+        if (player1Position === boardSize * boardSize - 1) {
+            alert('Player 1 wins!');
+        } else if (player2Position === boardSize * boardSize - 1) {
+            alert('Player 2 wins!');
+        }
+    }
+
+    function resetGame() {
+        player1Position = 0;
+        player2Position = 0;
+        currentPlayer = 1;
+        document.getElementById('player-turn').textContent = `Player ${currentPlayer}'s turn`;
+        updateTokens();
+    }
+
+    createBoard();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-```
