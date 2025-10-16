@@ -1,22 +1,22 @@
 # Snake and Ladder Game
 
-This project is a fully functional Snake and Ladder game implemented as a web app using HTML, CSS, and JavaScript. The game features a 10x10 grid board with players represented by tokens moving based on dice rolls. It includes ladders that move the player up and snakes that move the player down. The game displays the current player's turn, provides a button to roll the dice, visually updates the board and tokens after each move, detects and declares the winner when a player reaches the last square exactly, and includes a reset button to start a new game.
+Welcome to the Snake and Ladder game project! This project aims to create a fully functional web app version of the classic game using HTML, CSS, and JavaScript. The game features a 10x10 grid board with players represented by tokens moving based on dice rolls. It includes ladders that move the player up and snakes that move the player down, displays the current player's turn, provides a button to roll the dice, visually updates the board and tokens after each move, detects and declares the winner when a player reaches the last square exactly, and includes a reset button to start a new game.
 
 ## Setup
-
-To run this game locally, simply clone the project repository and open the `index.html` file in your web browser. There is no need for any additional setup or installation.
+To get started with the Snake and Ladder game, simply clone this repository to your local machine using the following command:
+```
+git clone https://github.com/your-username/demo-task.git
+```
 
 ## Usage
-
-- Click the "Roll Dice" button to roll the dice and move the player token.
-- Climb ladders to move up faster.
-- Watch out for snakes that can move you down the board.
-- The game will display the current player's turn and will declare the winner once a player reaches the last square.
+Once you have cloned the repository, open the `index.html` file in your web browser to start playing the game. Follow the on-screen instructions to roll the dice, move your token, and enjoy the gameplay.
 
 ## Code Explanation
-
-The game is implemented using HTML for the structure, CSS for styling, and JavaScript for the game logic. The code is self-contained and does not rely on any external libraries. The game is responsive and can be played on various screen sizes.
+The Snake and Ladder game is implemented using plain HTML, CSS, and JavaScript to ensure the code is self-contained and does not rely on any external libraries. The game logic is set up to handle player movements, ladder climbs, snake descents, dice rolls, turn switching, win detection, and game resets. All aspects of the game are designed to be responsive for various screen sizes.
 
 ## License
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more details.
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+If you encounter any issues or have questions about the Snake and Ladder game project, please feel free to open an issue on this repository. Thank you for checking out the project! 
+
+Happy gaming! 🐍🎲🪜
